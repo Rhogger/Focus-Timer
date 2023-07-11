@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+  <!-- <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon"> -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,6 +15,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
+
+  <script src="script.js" type="module" defer></script>
 </head>
 
 <body>
@@ -22,27 +24,27 @@
     <p id="time">00:00</p>
 
     <div class="btns-timer">
-      <button class="">
-        <img src="assets/icons/play.svg" alt="Button play timer " id="btn-play">
+      <button class="" id="btn-play">
+        <img src="assets/icons/play.svg" alt="Button play timer">
       </button>
-      <button class="hide">
-        <img src="assets/icons/pause.svg" alt="Button pause timer" id="btn-pause">
+      <button class="hide" id="btn-pause">
+        <img src="assets/icons/pause.svg" alt="Button pause timer">
       </button>
-      <button class="">
-        <img src="assets/icons/stopwatch.svg" alt="?" id="btn-timer">
+      <button class="" id="btn-watch">
+        <img src="assets/icons/stopwatch.svg" alt="?">
       </button>
-      <button class="hide">
-        <img src="assets/icons/stop.svg" alt="Button stop timer" id="btn-stop">
+      <button class="hide" id="btn-stop">
+        <img src="assets/icons/stop.svg" alt="Button stop timer">
       </button>
     </div>
   </main>
 
   <div class="btn-audio">
-    <button class="">
-      <img src="assets/icons/volume-unmuted.svg" alt="Button volume unmuted" id="btn-mute">
+    <button class="" id="btn-mute">
+      <img src="assets/icons/volume-unmuted.svg" alt="Button volume unmuted">
     </button>
-    <button class="hide">
-      <img src="assets/icons/volume-muted.svg" alt="Button volume muted" id="btn-unmute">
+    <button class="hide" id="btn-unmute">
+      <img src="assets/icons/volume-muted.svg" alt="Button volume muted">
     </button>
   </div>
 </body>
