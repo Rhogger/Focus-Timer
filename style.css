@@ -7,10 +7,13 @@
 :root {
   font-size: 6.25%;
 
+  --color-main: 194;
+
   --bg-app: hsl(240, 5%, 7%);
-  --bg-timer-buttons: hsla(194, 100%, 63%, 0.129);
+  --bg-timer-buttons: hsla(var(--color-main), 100%, 63%, 0.129);
 
   --c-time: hsl(0, 0%, 100%);
+  --c-buttons: hsl(var(--color-main), 100%, 63%);
 }
 
 body {
@@ -33,7 +36,10 @@ main {
   max-width: 230rem;
 }
 
-#time {
+.time {
+  display: flex;
+  justify-content: center;
+
   color: var(--c-time);
   font-size: 88rem;
   font-weight: 700;
@@ -42,6 +48,12 @@ main {
 button {
   background-color: transparent;
   border: none;
+}
+
+#btn-play svg path,
+#btn-pause svg path,
+#btn-mute svg path {
+  fill: var(--c-buttons);
 }
 
 .btns-timer {
