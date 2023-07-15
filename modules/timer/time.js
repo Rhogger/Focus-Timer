@@ -3,8 +3,9 @@ import { toggleBetweenPlayOrPause } from '../buttons/play-pause.js'
 
 export const Time = {
   minutes: '00',
-  seconds: '05',
-  finish: false
+  seconds: '08',
+  finish: false,
+  paused: false
 }
 
 export const minutesDisplay = document.querySelector('#minutes')
@@ -14,7 +15,9 @@ minutesDisplay.textContent = String(Time.minutes)
 secondsDisplay.textContent = String(Time.seconds)
 
 export function countdown() {
-  if (Time.finish === false) {
+  if (Time.finish === false && Time.paused === false) {
+    console.log('Play');
+
     setTimeout(function () {
       Time.minutes = Number(minutesDisplay.textContent)
       Time.seconds = Number(secondsDisplay.textContent)
@@ -25,9 +28,6 @@ export function countdown() {
       }
 
       Time.seconds--
-
-      // console.log(minutesDisplay.textContent);
-      console.log(secondsDisplay.textContent);
 
       if (Time.minutes < 10) {
         Time.minutes = '0' + Number(Time.minutes)
@@ -50,15 +50,20 @@ export function countdown() {
       countdown()
     }, 1000)
 
-  } else {
+  } else if (Time.finish === true && Time.paused === false) {
+    console.log('Parou');
     resetDisplayCountdown()
+    return
+  } else {
+    console.log('Pausou');
+    Time.paused = true
     return
   }
 }
 
 export function resetDisplayCountdown() {
   Time.minutes = '00'
-  Time.seconds = '05'
+  Time.seconds = '08'
 
   minutesDisplay.textContent = String(Time.minutes)
   secondsDisplay.textContent = String(Time.seconds)
