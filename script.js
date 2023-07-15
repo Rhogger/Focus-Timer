@@ -1,62 +1,60 @@
-import './modules/Controlls/play-pause.js'
-import './modules/Controlls/stop-edit.js'
-import './modules/Controlls/mute-unmute.js'
-import { toggleBetweenPlayOrPause } from './modules/Controlls/play-pause.js'
+import './factories/mute-unmute.js'
+import Timer from './factories/timer.js'
+import Controls from './factories/controls.js'
 
-export const Time = {
+const btnPlay = document.querySelector('#btn-play')
+const btnPause = document.querySelector('#btn-pause')
+const btnStop = document.querySelector('#btn-stop')
+const btnTimeEdit = document.querySelector('#btn-watch')
+
+const minutesDisplay = document.querySelector('#minutes')
+const secondsDisplay = document.querySelector('#seconds')
+
+const Time = {
   minutes: '00',
   seconds: '08',
   idCountdown: null,
 }
 
-export const minutesDisplay = document.querySelector('#minutes')
-export const secondsDisplay = document.querySelector('#seconds')
+const controls = Controls({
+  btnPlay,
+  btnPause,
+  btnStop,
+  btnTimeEdit
+})
 
-export function countdown() {
-  let minutes
-  let seconds
+const timer = Timer({
+  Time,
+  minutesDisplay,
+  secondsDisplay,
+  toggleBetweenPlayOrPause: controls.toggleBetweenPlayOrPause
+})
 
-  Time.idCountdown = setTimeout(function () {
-    minutes = Number(minutesDisplay.textContent)
-    seconds = Number(secondsDisplay.textContent)
+btnPlay.addEventListener('click', () => {
+  controls.toggleBetweenPlayOrPause()
+  timer.countdown()
+})
 
-    if (seconds <= 0) {
-      seconds = 60
-      minutes--
-    }
+btnPause.addEventListener('click', () => {
+  controls.toggleBetweenPlayOrPause()
+  clearTimeout(Time.idCountdown)
+})
 
-    if (minutes < 0) {
-      clearTimeout(Time.idCountdown)
+btnStop.addEventListener('click', () => {
+  controls.toggleBetweenPlayOrPause()
+  clearTimeout(Time.idCountdown)
+  timer.resetDisplayCountdown()
+})
 
-      alert('Defina um tempo para o timer.')
+btnTimeEdit.addEventListener('click', () => {
+  Time.minutes = Number(prompt('Quantos minutos deseja contar?'))
+  Time.minutes = Math.trunc(Number(Time.minutes))
 
-      minutes = prompt('Quantos minutos deseja contar?').padStart(2, '0')
+  while (Number(Time.minutes) < 0 || Number(Time.minutes) > 60 || isNaN(Number(Time.minutes))) {
+    alert('Tempo inválido, digite entre 1 e 60 minutos')
 
-      Time.minutes = minutes
+    Time.minutes = Number(prompt('Quantos minutos deseja contar?'))
+  }
 
-      seconds = 1
-    }
-
-    seconds--
-
-    displayTimer(minutes, seconds)
-
-    if (minutes == 0 && seconds == 0) {
-      resetDisplayCountdown()
-      toggleBetweenPlayOrPause()
-      return
-    }
-
-    countdown()
-  }, 1000)
-}
-
-export function resetDisplayCountdown() {
-  displayTimer(Time.minutes, 0)
-}
-
-function displayTimer(minutes, seconds) {
-  minutesDisplay.textContent = String(minutes).padStart(2, '0')
-  secondsDisplay.textContent = String(seconds).padStart(2, '0')
-}
-
+  timer.updateDisplay(Time.minutes, 0)
+})
