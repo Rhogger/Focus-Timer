@@ -13,24 +13,20 @@ export default function Timer({ Time, minutesDisplay, secondsDisplay, toggleBetw
       }
 
       if (minutes < 0) {
-        clearTimeout(Time.idCountdown)
-
-        alert('Defina um tempo para o timer.')
-
-        minutes = prompt('Quantos minutos deseja contar?').padStart(2, '0')
-
-        Time.minutes = minutes
-
-        seconds = 1
+        editTimer()
       }
 
       seconds--
 
       updateDisplay(minutes, seconds)
 
-      if (minutes == 0 && seconds == 0) {
-        resetDisplayCountdown()
-        toggleBetweenPlayOrPause()
+      let isFinished = minutes <= 0 && seconds <= 0
+
+      if (isFinished) {
+        setTimeout(function () {
+          resetDisplayCountdown()
+          toggleBetweenPlayOrPause()
+        }, 1000)
         return
       }
 
@@ -39,12 +35,30 @@ export default function Timer({ Time, minutesDisplay, secondsDisplay, toggleBetw
   }
 
   function resetDisplayCountdown() {
-    updateDisplay(Time.minutes, 0)
+    updateDisplay(Time.minutes, Time.seconds)
+    console.log(Time.minutes);
   }
 
   function updateDisplay(minutes, seconds) {
     minutesDisplay.textContent = String(minutes).padStart(2, '0')
     secondsDisplay.textContent = String(seconds).padStart(2, '0')
+    updateTitlePage(minutesDisplay.textContent, secondsDisplay.textContent)
+  }
+
+  function updateTitlePage(minutes, seconds) {
+    document.title = `Timer - ${minutes}:${seconds}`
+  }
+
+  function editTimer() {
+    clearTimeout(Time.idCountdown)
+
+    alert('Defina um tempo para o timer.')
+
+    minutes = prompt('Quantos minutos deseja contar?').padStart(2, '0')
+
+    Time.minutes = minutes
+
+    seconds = 1
   }
 
   return {
