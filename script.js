@@ -11,8 +11,8 @@ const minutesDisplay = document.querySelector('#minutes')
 const secondsDisplay = document.querySelector('#seconds')
 
 const Time = {
-  minutes: '00',
-  seconds: '08',
+  minutes: '01',
+  seconds: '10',
   idCountdown: null,
 }
 
@@ -31,18 +31,15 @@ const timer = Timer({
 })
 
 btnPlay.addEventListener('click', () => {
-  controls.toggleBetweenPlayOrPause()
-  timer.countdown()
+  play()
 })
 
 btnPause.addEventListener('click', () => {
-  controls.toggleBetweenPlayOrPause()
-  clearTimeout(Time.idCountdown)
+  pause()
 })
 
 btnStop.addEventListener('click', () => {
-  controls.toggleBetweenPlayOrPause()
-  clearTimeout(Time.idCountdown)
+  pause()
   timer.resetDisplayCountdown()
 })
 
@@ -58,3 +55,13 @@ btnTimeEdit.addEventListener('click', () => {
 
   timer.updateDisplay(Time.minutes, 0)
 })
+
+function play() {
+  controls.toggleBetweenPlayOrPause()
+  timer.countdown()
+}
+
+function pause() {
+  controls.toggleBetweenPlayOrPause()
+  clearTimeout(Time.idCountdown)
+}
