@@ -50,8 +50,9 @@ limpo e aprimorando os conhecimentos do ES6.
 
 ## 📑 TODO List <a name = "TODO"></a>
 
-[ ] Ajustar medidas com o clamp() <br> [ ] Ajustar aplicação para Mobile <br> [ ] Criar modal e
-substituir o prompt do JS
+- [ ] Ajustar medidas com o clamp() <br>
+- [ ] Ajustar aplicação para Mobile <br>
+- [ ] Criar modal e substituir o prompt do JS
 
 <br>
 <br>
