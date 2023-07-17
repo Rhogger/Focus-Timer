@@ -1,4 +1,4 @@
-export default function Timer({ Time, minutesDisplay, secondsDisplay, toggleBetweenPlayOrPause }) {
+export default function Timer({ Time, minutesDisplay, secondsDisplay, toggleBetweenPlayOrPause, sounds }) {
   function countdown() {
     let minutes
     let seconds
@@ -27,6 +27,8 @@ export default function Timer({ Time, minutesDisplay, secondsDisplay, toggleBetw
           resetDisplayCountdown()
           toggleBetweenPlayOrPause()
         }, 1000)
+
+        sounds.finishTimer()
         return
       }
 
@@ -36,7 +38,6 @@ export default function Timer({ Time, minutesDisplay, secondsDisplay, toggleBetw
 
   function resetDisplayCountdown() {
     updateDisplay(Time.minutes, Time.seconds)
-    console.log(Time.minutes);
   }
 
   function updateDisplay(minutes, seconds) {
