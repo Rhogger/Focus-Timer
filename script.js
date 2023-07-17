@@ -14,8 +14,8 @@ import Controls from './factories/controls.js'
 import Timer from './factories/timer.js'
 
 const Time = {
-  minutes: '01',
-  seconds: '10',
+  minutes: '05',
+  seconds: '00',
   idCountdown: null,
 }
 
